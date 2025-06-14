@@ -16,6 +16,9 @@ export class GameManager {
         this.bullets = [];
         this.fallingObjects = [];
         this.explosions = [];
+        this.powerUps = [];
+        this.isInvincible = false;
+        this.invincibilityTimer = 0;
     }
 
     reset() {
@@ -62,5 +65,10 @@ export class GameManager {
 
     checkCollision(a, b) {
         return CollisionManager.isColliding(a, b);
+    }
+    
+    enableInvincibility(duration = 300) {
+    this.isInvincible = true;
+    this.invincibilityTimer = duration;
     }
 }

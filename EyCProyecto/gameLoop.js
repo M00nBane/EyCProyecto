@@ -1,5 +1,6 @@
 import { FallingObject } from './fallingObject.js';
 import { Explosion } from './explosion.js';
+import { PowerUp } from './powerUp.js';
 
 const explosionSound = new Audio('sound/explosion.mp3');
 const hitSound = new Audio('sound/hit.mp3');
@@ -15,6 +16,23 @@ export function gameLoop(game, ctx, canvas) {
 
     if (Math.random() < 1 / game.spawnRate) {
         game.fallingObjects.push(new FallingObject(canvas.width));
+    }
+
+    if (Math.random() < 1 / 600) {
+        game.powerUps.push(new PowerUp(canvas.width));
+    }
+
+    for (let i = game.powerUps.length - 1; i >= 0; i--) {
+        const power = game.powerUps[i];
+        power.update(game.objectSpeed);
+        power.draw(ctx);
+
+        if (game.checkCollision(game.player, power)) {
+            game.enableInvincibility();
+            game.powerUps.splice(i, 1);
+        } else if (power.y > canvas.height) {
+            game.powerUps.splice(i, 1);
+        }
     }
 
     for (let i = game.bullets.length - 1; i >= 0; i--) {
@@ -45,7 +63,7 @@ export function gameLoop(game, ctx, canvas) {
         obj.update(game.objectSpeed);
         obj.draw(ctx);
 
-        if (game.checkCollision(game.player, obj)) {
+        if (!game.isInvincible && game.checkCollision(game.player, obj)) {
             game.lives--;
             document.getElementById('lives').textContent = game.lives;
             hitSound.play();
@@ -70,6 +88,13 @@ export function gameLoop(game, ctx, canvas) {
         explosion.draw(ctx);
         if (explosion.timer <= 0) {
             game.explosions.splice(i, 1);
+        }
+    }
+
+    if (game.isInvincible) {
+        game.invincibilityTimer--;
+        if (game.invincibilityTimer <= 0) {
+            game.isInvincible = false;
         }
     }
 
