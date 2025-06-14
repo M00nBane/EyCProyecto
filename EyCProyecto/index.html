@@ -125,10 +125,10 @@
     }
 
     function reanudarJuego() {
-        if (typeof startGameLoop === 'function') {
-            startGameLoop();
-        }
+        // 1. quitamos la pausa
         juegoPausado = false;
+        // 2. volvemos a arrancar el bucle
+        startGameLoop();
     }
 </script>
 </body>
