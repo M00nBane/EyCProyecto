@@ -2,7 +2,7 @@ export class InputManager {
     constructor(player, game) {
         this.player = player;
         this.game = game;
-        this.shootSound = new Audio('shoot.mp3');
+        this.shootSound = new Audio('sound/shoot.mp3');
         this.init();
     }
 

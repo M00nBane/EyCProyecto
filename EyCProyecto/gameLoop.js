@@ -1,10 +1,10 @@
 import { FallingObject } from './fallingObject.js';
 import { Explosion } from './explosion.js';
 
-const explosionSound = new Audio('explosion.mp3');
-const hitSound = new Audio('hit.mp3');
+const explosionSound = new Audio('sound/explosion.mp3');
+const hitSound = new Audio('sound/hit.mp3');
 const backgroundImage = new Image();
-backgroundImage.src = 'background.jpg';
+backgroundImage.src = 'img/background.jpg';
 
 export function gameLoop(game, ctx, canvas) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);

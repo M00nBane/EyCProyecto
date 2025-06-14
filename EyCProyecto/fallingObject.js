@@ -5,7 +5,7 @@ export class FallingObject {
         this.width = 24;
         this.height = 24;
         this.image = new Image();
-        this.image.src = 'rock.png';
+        this.image.src = 'img/rock.png';
     }
 
     update(speed) {
