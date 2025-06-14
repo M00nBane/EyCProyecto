@@ -50,6 +50,15 @@ export function gameLoop(game, ctx, canvas) {
             document.getElementById('lives').textContent = game.lives;
             hitSound.play();
             game.fallingObjects.splice(i, 1);
+            
+            if (!game.player.originalSpeed) {
+                game.player.originalSpeed = game.player.speed;
+                game.player.speed *= 2.5;
+                setTimeout(() => {
+                game.player.speed = game.player.originalSpeed;
+                delete game.player.originalSpeed;
+                }, 3000);
+            }
             if (game.lives === 0) {
                 game.explosions.push(new Explosion(game.player.x, game.player.y));
                 document.getElementById('finalScore').textContent = game.score;
