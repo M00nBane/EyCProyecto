@@ -4,6 +4,9 @@ import { PowerUp } from './powerUp.js';
 
 const explosionSound = new Audio('sound/explosion.mp3');
 const hitSound = new Audio('sound/hit.mp3');
+const invincibleSound = new Audio('sound/invincible.mp3');
+invincibleSound.loop = true;
+
 const backgroundImage = new Image();
 backgroundImage.src = 'img/background.jpg';
 
@@ -12,7 +15,12 @@ export function gameLoop(game, ctx, canvas) {
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
     game.player.update(canvas);
+
+    if (game.isInvincible && Math.floor(game.invincibilityTimer / 5) % 2 === 0) {
+        ctx.globalAlpha = 0.4;
+    }
     game.player.draw(ctx);
+    ctx.globalAlpha = 1.0;
 
     if (Math.random() < 1 / game.spawnRate) {
         game.fallingObjects.push(new FallingObject(canvas.width));
@@ -29,6 +37,8 @@ export function gameLoop(game, ctx, canvas) {
 
         if (game.checkCollision(game.player, power)) {
             game.enableInvincibility();
+            invincibleSound.currentTime = 0;
+            invincibleSound.play();
             game.powerUps.splice(i, 1);
         } else if (power.y > canvas.height) {
             game.powerUps.splice(i, 1);
@@ -95,6 +105,8 @@ export function gameLoop(game, ctx, canvas) {
         game.invincibilityTimer--;
         if (game.invincibilityTimer <= 0) {
             game.isInvincible = false;
+            invincibleSound.pause();
+            invincibleSound.currentTime = 0;
         }
     }
 
