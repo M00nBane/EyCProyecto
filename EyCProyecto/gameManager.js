@@ -11,6 +11,7 @@ export class GameManager {
         this.level = 1;
         this.objectSpeed = 2;
         this.spawnRate = 60;
+        this.enemiesDestroyed = 0;
         this.player = new Player(canvas.width / 2 - 16, canvas.height - 42);
         this.Bullet = Bullet;
         this.bullets = [];
@@ -24,6 +25,7 @@ export class GameManager {
         this.level = 1;
         this.objectSpeed = 2;
         this.spawnRate = 60;
+        this.enemiesDestroyed = 0;
         this.bullets = [];
         this.fallingObjects = [];
         this.explosions = [];
@@ -35,8 +37,13 @@ export class GameManager {
     }
 
     updateScore() {
+        this.enemiesDestroyed++;
         this.score += 10;
         document.getElementById('score').textContent = this.score;
+        if (this.enemiesDestroyed % 4 === 0 && this.lives < 5) {
+            this.lives++;
+            document.getElementById('lives').textContent = this.lives;
+        }
         this.updateLevel();
     }
 
