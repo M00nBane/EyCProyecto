@@ -7,7 +7,6 @@ const ctx = canvas.getContext('2d');
 const game = new GameManager(canvas, ctx);
 new InputManager(game.player, game);
 
-// Botones UI
 startButton.addEventListener('click', () => {
     mainMenu.classList.add('hidden');
     gameScreen.classList.remove('hidden');

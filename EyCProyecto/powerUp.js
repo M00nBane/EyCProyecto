@@ -1,11 +1,11 @@
-export class FallingObject {
+export class PowerUp {
     constructor(canvasWidth) {
         this.x = Math.random() * (canvasWidth - 24);
         this.y = 0;
         this.width = 24;
         this.height = 24;
         this.image = new Image();
-        this.image.src = 'img/rock.png';
+        this.image.src = 'img/power.png';
     }
 
     update(speed) {
