@@ -6,7 +6,7 @@ export class Explosion {
         this.height = 32;
         this.timer = 30;
         this.image = new Image();
-        this.image.src = 'burst.png';
+        this.image.src = 'img/burst.png';
     }
 
     update() {

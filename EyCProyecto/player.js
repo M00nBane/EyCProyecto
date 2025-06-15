@@ -6,7 +6,7 @@ export class Player {
         this.height = 32;
         this.speed = 5;
         this.image = new Image();
-        this.image.src = 'player.png';
+        this.image.src = 'img/player.png';
         this.moving = { left: false, right: false, up: false, down: false };
     }
 

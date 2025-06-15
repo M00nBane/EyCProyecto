@@ -17,6 +17,9 @@ export class GameManager {
         this.bullets = [];
         this.fallingObjects = [];
         this.explosions = [];
+        this.powerUps = [];
+        this.isInvincible = false;
+        this.invincibilityTimer = 0;
     }
 
     reset() {
@@ -29,6 +32,9 @@ export class GameManager {
         this.bullets = [];
         this.fallingObjects = [];
         this.explosions = [];
+        this.powerUps = [];
+        this.isInvincible = false;
+        this.invincibilityTimer = 0;
         this.player.x = this.canvas.width / 2 - 16;
         this.player.y = this.canvas.height - 42;
         document.getElementById('score').textContent = this.score;
@@ -69,5 +75,10 @@ export class GameManager {
 
     checkCollision(a, b) {
         return CollisionManager.isColliding(a, b);
+    }
+
+    enableInvincibility(duration = 300) {
+        this.isInvincible = true;
+        this.invincibilityTimer = duration;
     }
 }
