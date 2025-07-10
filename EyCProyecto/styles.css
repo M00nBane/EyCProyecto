@@ -121,3 +121,9 @@ ul li {
     z-index: 999;
     text-align: center;
 }
+#lives img {
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
